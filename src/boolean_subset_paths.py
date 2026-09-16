@@ -1,5 +1,8 @@
+"""Subset-covering paths from a symmetric chain decomposition."""
+
 
 def generate_covering_paths_scd():
+    """Return 20 permutation paths whose prefixes cover all subsets of A-F."""
     elements = ['A', 'B', 'C', 'D', 'E', 'F']
     n = len(elements)
 

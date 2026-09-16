@@ -1,7 +1,10 @@
+"""Visualize three concentric cubic grids with 27 vertices each."""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 def draw_all_vertices_cubes():
+    """Display the grids with side lengths 3, 5, and 7."""
     fig = plt.figure(figsize=(12, 12))
     ax = fig.add_subplot(111, projection='3d')
 

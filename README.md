@@ -1,35 +1,43 @@
-# Combinatorial Experiment Design Utilities
+# Combinatorial Experiment Design
 
-Small Python utilities for exploring structured experimental grids and subset-covering measurement orders.
+Python utilities for studying structured experimental grids and measurement sequences. The examples calculate grid rank sizes and construct a compact set of ordered paths that covers every subset of six experimental factors.
 
-## Included tools
+## Tools
 
-| Script | Purpose | Default example |
+| Script | Method | Default example |
 | --- | --- | --- |
-| `src/nested_lattices.py` | Visualize three nested cubic grids | Side lengths 3, 5, and 7, with 27 vertices per grid |
-| `src/product_lattice_width.py` | Compute rank sizes by polynomial convolution | Six dimensions with five values each |
-| `src/boolean_subset_paths.py` | Construct subset-covering permutation paths with symmetric chain decomposition | Twenty paths covering the 64 subsets of six elements |
+| `src/product_lattice_width.py` | Polynomial convolution for product-lattice rank counts | Six dimensions with five values per dimension |
+| `src/boolean_subset_paths.py` | Symmetric chain decomposition of a Boolean lattice | 20 paths covering all 64 subsets of six elements |
+| `src/nested_lattices.py` | Three-dimensional grid visualization | Three nested grids with side lengths 3, 5, and 7 |
 
-A rank groups grid points with the same coordinate sum. A permutation path adds one element at a time; its prefixes describe nested experimental subsets. These are exploratory combinatorial utilities, not a laboratory scheduling or motion-control system.
+A rank groups grid points with the same coordinate sum. Each permutation path adds one factor at a time, so its prefixes form a sequence of nested experimental subsets. The 20-path construction meets the middle-rank lower bound for the six-element example.
 
 ## Run
 
-Python 3.10 or newer is recommended. The two combinatorial calculations use only the standard library. The visualization requires NumPy and Matplotlib.
+Use Python 3.10 or newer. The rank and subset calculations require only the standard library:
+
+```bash
+python src/product_lattice_width.py
+python src/boolean_subset_paths.py
+```
+
+Install NumPy and Matplotlib for the grid visualization:
 
 ```bash
 python -m pip install -r requirements.txt
-python src/product_lattice_width.py
-python src/boolean_subset_paths.py
 python src/nested_lattices.py
-python -m unittest discover -s tests -v
 ```
 
 ## Validation
 
-Tests check that polynomial coefficients sum to the grid cardinality, rank counts are symmetric, every generated path is a valid permutation, and the path prefixes cover all subsets. The number of paths is checked against the middle-rank lower bound. No external measurements are required.
+```bash
+python -m unittest discover -s tests -v
+```
 
-## Provenance and scope
+Tests verify that rank counts sum to the grid cardinality and are symmetric, each path is a valid permutation, and the path prefixes cover every subset. They also check the number of paths against the middle-rank lower bound.
 
-Curated from local research utilities. Comments and console messages were translated into English, filenames were normalized, and script entry points were guarded so importing functions does not launch a plot or print results. Computational algorithms and numerical defaults were preserved. The chain construction is a standard combinatorial method and is not presented as a new algorithm. Original files and a SHA-256 preservation manifest are retained outside this repository.
+These are exploratory utilities for experimental design. They do not model instrument travel, acquisition time, or hardware constraints. The chain decomposition is a standard combinatorial construction.
 
-No redistribution license has been selected for the original code. See `NOTICE.md`.
+## Attribution
+
+The scripts retain the algorithms and numerical defaults of the original research utilities. No repository-wide open-source license has been assigned. See [NOTICE.md](NOTICE.md).

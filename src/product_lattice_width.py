@@ -1,4 +1,8 @@
+"""Rank counts for a product of six five-element chains."""
+
+
 def calculate_max_width():
+    """Return the largest rank index, its size, and all rank counts."""
     # Start with the constant polynomial 1.
     # coefs[i] is the coefficient of x**i.
     coefs = [1]
