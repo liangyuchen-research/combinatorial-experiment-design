@@ -1,11 +1,17 @@
-"""Visualize three concentric cubic grids with 27 vertices each."""
+"""Visualize three concentric cubic grids with 27 vertices each.
+
+    python src/nested_lattices.py                 # interactive window
+    python src/nested_lattices.py --output fig.png  # save instead of showing
+"""
+
+import argparse
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-def draw_all_vertices_cubes():
-    """Display the grids with side lengths 3, 5, and 7."""
-    fig = plt.figure(figsize=(12, 12))
+def draw_all_vertices_cubes(output=None):
+    """Display the grids with side lengths 3, 5, and 7, or save them to ``output``."""
+    fig = plt.figure(figsize=(6, 6) if output else (12, 12))
     ax = fig.add_subplot(111, projection='3d')
 
     # Side lengths of the three nested layers.
@@ -69,8 +75,14 @@ def draw_all_vertices_cubes():
     ax.set_box_aspect([1,1,1])
     ax.view_init(elev=25, azim=-45)
     plt.tight_layout()
-    plt.show()
+    if output:
+        fig.savefig(output, dpi=200, bbox_inches="tight")
+        print(f"wrote {output}")
+    else:
+        plt.show()
 
 
 if __name__ == "__main__":
-    draw_all_vertices_cubes()
+    parser = argparse.ArgumentParser(description="Draw three nested cubic grids.")
+    parser.add_argument("--output", help="save the figure to this path instead of opening a window")
+    draw_all_vertices_cubes(parser.parse_args().output)
